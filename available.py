@@ -36,7 +36,7 @@ class SSM:
                 ],
             )
             logging.info("Got patch result for %s", instance)
-            count = (response["Patches"]).count()
+            count = len(response["Patches"])
 
         except ClientError:
             logging.exception("not able to get the patch for %s:", instance)
@@ -75,7 +75,7 @@ def main():
 
 def get_patch_and_insert(ssm_client, instance, influx_client):
     patches = ssm_client.get_patch(instance)
-    insert_into_influxdb(patches, instance, influx_client)
+    #insert_into_influxdb(patches, instance, influx_client)
     return patches
 
 
